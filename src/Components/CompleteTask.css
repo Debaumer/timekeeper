@@ -1,0 +1,7 @@
+.CompleteTask {
+    border: 1px solid #96398b;
+    box-shadow: 0 17px 18px #96398b;
+    border-radius: 20px 20px;
+    width: 60%;
+    margin: 10px auto;
+}
