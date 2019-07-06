@@ -1,0 +1,25 @@
+.dayContainer {
+  margin-bottom: 70px;
+}
+
+.day {
+  cursor: pointer;
+  width: 200px;
+  margin: 0 auto 0 auto;
+}
+
+.hiddenChildren > * {
+  display: none;
+}
+
+.month {
+}
+
+.year {
+}
+
+.hidden {
+}
+
+.shown {
+}

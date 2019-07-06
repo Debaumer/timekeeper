@@ -1,5 +1,5 @@
 import React from "react";
-import CompleteTask from "./CompleteTask";
+import classes from "./Calendar.css";
 
 const day = props => {
   var date =
@@ -10,9 +10,13 @@ const day = props => {
     props.date.slice(0, 4);
 
   return (
-    <div date={props.date}>
-      <h1>{date}</h1>
-      <div>{props.children}</div>
+    <div>
+      <div onClick={props.toggle} className={classes.day}>
+        <h1>{date}</h1>
+      </div>
+      <div id={props.date} date={props.date} className={props.classes}>
+        <div>{props.children}</div>
+      </div>
     </div>
   );
 };
