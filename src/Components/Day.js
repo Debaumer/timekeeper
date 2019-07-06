@@ -1,4 +1,5 @@
 import React from "react";
+import CompleteTask from "./CompleteTask";
 
 const day = props => {
   var date =
@@ -9,9 +10,9 @@ const day = props => {
     props.date.slice(0, 4);
 
   return (
-    <div>
+    <div date={props.date}>
       <h1>{date}</h1>
-      {props.children}
+      <div>{props.children}</div>
     </div>
   );
 };

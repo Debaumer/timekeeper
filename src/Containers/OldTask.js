@@ -19,7 +19,7 @@ class OldTask extends Component {
 
   render() {
     let output = <p>there's no tasks here, yet!</p>;
-    var uniqueDates = [];
+    let uniqueDates = [];
     if (!this.props.loading) {
       this.props.tasks.map(item => {
         var found = uniqueDates.find(function(arg) {
@@ -32,28 +32,40 @@ class OldTask extends Component {
         }
       });
 
-      uniqueDates = uniqueDates.map(item => {
-        return <Day id={item} date={item} />;
+      uniqueDates.sort(function(a, b) {
+        return b - a;
       });
 
-      output = this.props.tasks.map(task => {
+      this.props.tasks.sort(function(a, b) {
+        return b.date - a.date;
+      });
+
+      output = uniqueDates.map(item => {
         return (
-          <CompleteTask
-            key={task.id}
-            taskName={task.name}
-            hours={task.hours}
-            minutes={task.minutes}
-            seconds={task.seconds}
-            date={task.date}
-          />
+          <Day date={item}>
+            {this.props.tasks.map(task => {
+              if (item === task.date) {
+                return (
+                  <CompleteTask
+                    key={task.id}
+                    taskName={task.name}
+                    hours={task.hours}
+                    minutes={task.minutes}
+                    seconds={task.seconds}
+                    date={task.date}
+                  />
+                );
+              } else {
+                return;
+              }
+            })}
+          </Day>
         );
       });
     }
-    //maybe log dategroup or try to put it into output outPutItems
     return (
       <div className="OldTasks">
         <h1>Past Tasks</h1>
-        <div>{uniqueDates}</div>
         <div>{output}</div>
       </div>
     );
