@@ -20,16 +20,15 @@ class OldTask extends Component {
     }, 1000);
   }
 
-  toggleDropDown(e, date) {
-    console.log(date);
-    console.log(e.currentTarget);
-    var container = document.getElementById(date);
+  toggleDropDown(e, id) {
+    console.log(id);
+    var container = document.getElementById(id);
     if (container.classList.contains(classes.hiddenChildren)) {
-      console.log("the class exists");
+      console.log("removing class...");
       container.classList.remove(classes.hiddenChildren);
     } else {
+      console.log("adding class...");
       container.classList.add(classes.hiddenChildren);
-      console.log("the class does not exist");
     }
     console.log(container);
   }
@@ -89,30 +88,56 @@ class OldTask extends Component {
         return b.date - a.date;
       });
 
-      output = uniqueDates.map(item => {
+      output = uniqueYears.map(year => {
         return (
-          <Day
+          <Year
+            year={year}
             classes={classes.hiddenChildren}
-            date={item}
-            toggle={e => this.toggleDropDown(e, item)}
+            toggle={e => this.toggleDropDown(e, year)}
           >
-            {this.props.tasks.map(task => {
-              if (item === task.date) {
+            {uniqueMonths.map(month => {
+              if (month.indexOf(year) != -1) {
                 return (
-                  <CompleteTask
-                    key={task.id}
-                    taskName={task.name}
-                    hours={task.hours}
-                    minutes={task.minutes}
-                    seconds={task.seconds}
-                    date={task.date}
-                  />
+                  <Month
+                    month={month}
+                    classes={classes.hiddenChildren}
+                    toggle={e => this.toggleDropDown(e, month)}
+                  >
+                    {uniqueDates.map(date => {
+                      console.log(year + month.slice(0, 2));
+                      console.log(date.indexOf(year + month.slice(0, 2)));
+                      if (date.indexOf(year + month.slice(0, 2)) != -1) {
+                        return (
+                          <Day
+                            classes={classes.hiddenChildren}
+                            date={date}
+                            toggle={e => this.toggleDropDown(e, date)}
+                          >
+                            {this.props.tasks.map(task => {
+                              if (date === task.date) {
+                                return (
+                                  <CompleteTask
+                                    key={task.id}
+                                    taskName={task.name}
+                                    hours={task.hours}
+                                    minutes={task.minutes}
+                                    seconds={task.seconds}
+                                    date={task.date}
+                                  />
+                                );
+                              } else {
+                                return;
+                              }
+                            })}
+                          </Day>
+                        );
+                      }
+                    })}
+                  </Month>
                 );
-              } else {
-                return;
               }
             })}
-          </Day>
+          </Year>
         );
       });
     }

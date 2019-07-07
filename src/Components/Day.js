@@ -11,7 +11,7 @@ const day = props => {
 
   return (
     <div>
-      <div onClick={props.toggle} className={classes.day}>
+      <div onClick={props.toggle} className={classes.calendarPeriod}>
         <h1>{date}</h1>
       </div>
       <div id={props.date} date={props.date} className={props.classes}>

@@ -5,10 +5,10 @@ const year = props => {
   return (
     <div year={props.year}>
       <div>
-        <div onClick={props.toggle} className={classes.day}>
+        <div onClick={props.toggle} className={classes.calendarPeriod}>
           <h1>{props.year}</h1>
         </div>
-        <div id={props.date} date={props.date} className={props.classes}>
+        <div id={props.year} date={props.year} className={props.classes}>
           <div>{props.children}</div>
         </div>
       </div>
