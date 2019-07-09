@@ -10,7 +10,11 @@ const day = props => {
     props.date.slice(0, 4);
 
   return (
-    <div onClick={props.toggle} className={classes.calendarPeriod}>
+    <div
+      style={{ marginLeft: props.indent }}
+      onClick={props.toggle}
+      className={classes.calendarPeriod}
+    >
       <h1>{date}</h1>
       <div id={props.date} date={props.date} className={props.classes}>
         {props.children}
