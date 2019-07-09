@@ -6,6 +6,7 @@ import Day from "../Components/Day";
 import Month from "../Components/Month";
 import Year from "../Components/Year";
 import classes from "../Components/Calendar.css";
+import * as ctClasses from "../Components/CompleteTask.css";
 
 class OldTask extends Component {
   constructor() {
@@ -14,23 +15,34 @@ class OldTask extends Component {
       dates: []
     };
   }
+
   componentDidMount() {
     setTimeout(() => {
       this.props.onFetchTasks(this.props.token, this.props.userId);
     }, 1000);
   }
 
+  hideChildren(container) {
+    if (container.children[0].classList.contains(ctClasses.CompleteTask)) {
+      return null;
+    }
+    for (var i = 0; i < container.children.length; i++) {
+      container.children[i].children[1].classList.add(classes.hiddenChildren);
+      if (container.children[i].children[1].id) {
+        console.log(container.children[i].children[1].classList);
+        this.hideChildren(container.children[i].children[1]);
+      }
+    }
+  }
+
   toggleDropDown(e, id) {
-    console.log(id);
     var container = document.getElementById(id);
     if (container.classList.contains(classes.hiddenChildren)) {
-      console.log("removing class...");
       container.classList.remove(classes.hiddenChildren);
     } else {
-      console.log("adding class...");
       container.classList.add(classes.hiddenChildren);
+      this.hideChildren(container);
     }
-    console.log(container);
   }
 
   render() {
@@ -72,6 +84,7 @@ class OldTask extends Component {
         } else {
           uniqueDates.push(item.date);
         }
+        return null;
       });
 
       uniqueDates.sort(function(a, b) {
@@ -96,7 +109,7 @@ class OldTask extends Component {
             toggle={e => this.toggleDropDown(e, year)}
           >
             {uniqueMonths.map(month => {
-              if (month.indexOf(year) != -1) {
+              if (month.indexOf(year) !== -1) {
                 return (
                   <Month
                     month={month}
@@ -104,9 +117,7 @@ class OldTask extends Component {
                     toggle={e => this.toggleDropDown(e, month)}
                   >
                     {uniqueDates.map(date => {
-                      console.log(year + month.slice(0, 2));
-                      console.log(date.indexOf(year + month.slice(0, 2)));
-                      if (date.indexOf(year + month.slice(0, 2)) != -1) {
+                      if (date.indexOf(year + month.slice(0, 2)) !== -1) {
                         return (
                           <Day
                             classes={classes.hiddenChildren}
@@ -126,16 +137,18 @@ class OldTask extends Component {
                                   />
                                 );
                               } else {
-                                return;
+                                return null;
                               }
                             })}
                           </Day>
                         );
                       }
+                      return null;
                     })}
                   </Month>
                 );
               }
+              return null;
             })}
           </Year>
         );

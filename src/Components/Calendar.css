@@ -11,3 +11,6 @@
 .hiddenChildren > * {
   display: none;
 }
+
+.hasDropDownElements {
+}

@@ -10,12 +10,10 @@ const day = props => {
     props.date.slice(0, 4);
 
   return (
-    <div>
-      <div onClick={props.toggle} className={classes.calendarPeriod}>
-        <h1>{date}</h1>
-      </div>
+    <div onClick={props.toggle} className={classes.calendarPeriod}>
+      <h1>{date}</h1>
       <div id={props.date} date={props.date} className={props.classes}>
-        <div>{props.children}</div>
+        {props.children}
       </div>
     </div>
   );
