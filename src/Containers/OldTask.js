@@ -29,7 +29,6 @@ class OldTask extends Component {
     for (var i = 0; i < container.children.length; i++) {
       container.children[i].children[1].classList.add(classes.hiddenChildren);
       if (container.children[i].children[1].id) {
-        console.log(container.children[i].children[1].classList);
         this.hideChildren(container.children[i].children[1]);
       }
     }
