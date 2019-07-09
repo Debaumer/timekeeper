@@ -68,19 +68,15 @@ class OldTask extends Component {
           return arg === year;
         });
 
-        if (foundYear) {
-        } else {
+        if (!foundYear) {
           uniqueYears.push(year);
         }
 
-        if (foundMonth) {
-        } else {
+        if (!foundMonth) {
           uniqueMonths.push(`${month}-${year}`);
         }
 
-        if (foundDate) {
-          //return
-        } else {
+        if (!foundDate) {
           uniqueDates.push(item.date);
         }
         return null;
