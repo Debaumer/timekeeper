@@ -7,6 +7,7 @@ import Month from "../Components/Month";
 import Year from "../Components/Year";
 import classes from "../Components/Calendar.css";
 import * as ctClasses from "../Components/CompleteTask.css";
+import monthTranslate from "../hoc/monthTranslate";
 
 class OldTask extends Component {
   constructor() {
@@ -108,6 +109,7 @@ class OldTask extends Component {
                 return (
                   <Month
                     indent={100}
+                    monthString={monthTranslate(month)}
                     month={month}
                     classes={classes.hiddenChildren}
                     toggle={e => this.toggleDropDown(e, month)}
