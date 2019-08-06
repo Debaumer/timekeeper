@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import {updateObject} from '../Utility/UpdateObject';
 import Timer from "../../Components/Timer";
 import CompleteTask from "../../Components/CompleteTask";
 import CurrentTask from "../../Components/CurrentTask";
@@ -220,11 +219,8 @@ class ClockContainer extends Component {
     let warningMessage = null;
     if (!this.props.userId)
       warningMessage = (
-        <p>This Won't Save to the server if you don't log in, numbnuts.</p>
+        <p>This won't save to the server if you don't log in, numbnuts.</p>
       );
-    //else if(this.state.isOn === true) {
-    //don't display the submit  once the timer has
-    //started
 
     let comTasks = (
       <div>
